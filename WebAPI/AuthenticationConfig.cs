@@ -23,8 +23,10 @@ namespace WebAPI
              * the user is not allowed to login 
              * until we send a email confirmation link to him and he confirms it by clicking on it.
              * */
-            services.AddIdentity<SystemUser, SystemUserRole>(options => options.SignIn.RequireConfirmedAccount = false)
-                            .AddEntityFrameworkStores<CoreDataContext>();
+            services.AddIdentity<SystemUser, SystemUserRole>(options => {
+                    options.SignIn.RequireConfirmedAccount = false;
+                })
+                .AddEntityFrameworkStores<CoreDataContext>();
 
             var jwtBearerTokenSettings = configurationSection.Get<JwtBearerTokenSettings>();
             var key = Encoding.ASCII.GetBytes(jwtBearerTokenSettings.SecretKey);

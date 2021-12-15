@@ -2,6 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
 using WebAPI.DataContext;
+using WebAPI.Model;
+using WebAPI.Model.DataManager;
+using WebAPI.Model.Repository;
 
 namespace WebAPI
 {
@@ -39,6 +42,12 @@ namespace WebAPI
 
             ////Unit of work
             //services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            //services.AddTransient<IDataRepository<Employee>, EmployeeManager>();
+
+            services.AddScoped<IDataRepository<Employee>, EmployeeManager>();
+
+
         }
     }
 }
