@@ -43,6 +43,13 @@ namespace WebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
 
+            /*
+             * AddAutomapper method
+             It automatically scans for Mappingprofile contain mapping configuration
+             */
+            //services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // same as above, but its better not use the class name
+
             AuthenticationConfig.Initialize(services, Configuration.GetSection("JwtBearerTokenSettings"));
             ContainerConfig.Initialize(services, connectionString);
         }

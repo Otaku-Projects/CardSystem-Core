@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.Model;
@@ -20,6 +21,7 @@ namespace WebAPI.DataContext
         //public DbSet<FunctionGroup> FunctionGroups { get; set; }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeeEmergencyContact> EmployeeEmergencyContact { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -55,6 +57,28 @@ namespace WebAPI.DataContext
             {
                 UserName = "Demo"
             });
+
+            //modelBuilder.Entity<Employee>().HasData(new Employee
+            //{ 
+            //    EmployeeId = Guid.NewGuid().ToString(),
+            //    FirstName = "Peter",
+            //    LastName = "Pan"
+            //}, new Employee
+            //{
+            //    FirstName = "Chan",
+            //    LastName = "Tai Men"
+            //}
+            //    );
+
+            //modelBuilder.Configurations.Add(new DepartmentTypeConfiguration());
+
+            // generate dummy data
+            modelBuilder.Entity<Employee>().Property(f => f.EmployeeId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<EmployeeEmergencyContact>().Property(f => f.EmergencyContactId).ValueGeneratedOnAdd();
+
+            //modelBuilder.Entity<Employee>().Property(p => p.EmployeeId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+
         }
     }
 }

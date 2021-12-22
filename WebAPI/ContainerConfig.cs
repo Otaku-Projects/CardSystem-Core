@@ -45,7 +45,11 @@ namespace WebAPI
 
             //services.AddTransient<IDataRepository<Employee>, EmployeeManager>();
 
+
+
             services.AddScoped<IDataRepository<Employee>, EmployeeManager>();
+
+            services.AddScoped<IRepositoryWrapperEmployee, RepositoryWrapperEmployee>();
 
 
         }

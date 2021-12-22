@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.DataContext;
 
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(CoreDataContext))]
-    partial class CoreDataContextModelSnapshot : ModelSnapshot
+    [Migration("20211216043301_initial.employee.20211216.1")]
+    partial class initialemployee202112161
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -206,12 +208,6 @@ namespace WebAPI.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -221,32 +217,6 @@ namespace WebAPI.Migrations
                     b.HasKey("EmployeeId");
 
                     b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("WebAPI.Model.EmployeeEmergencyContact", b =>
-                {
-                    b.Property<long>("EmergencyContactId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("EmployeeId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Relationship")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("EmergencyContactId");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("EmployeeEmergencyContact");
                 });
 
             modelBuilder.Entity("WebAPI.Model.FunctionGroup", b =>
@@ -337,37 +307,37 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b6061aab-a204-4a1a-9ff6-fa6e751df500",
+                            Id = "9a7f3d42-6a5c-4e22-855b-8306a9861436",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9e8f70e7-bfe6-4a73-866c-29be6811758a",
+                            ConcurrencyStamp = "ffe0f56d-1ea5-4a06-b559-4c3d85529d53",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bd6629e2-56fd-4f34-9940-b5500ee9ef29",
+                            SecurityStamp = "6a708f10-a686-4c2d-aead-a6874d01899c",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = "fe68b0c4-88c1-41e5-b80e-dd3e1bd14029",
+                            Id = "8a65061d-2fd8-4d90-8fa1-ade7b5801b3a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3263f1b3-e47d-47dd-926b-f74d3be59b8a",
+                            ConcurrencyStamp = "8cd73bdf-7c02-4812-9fc6-e0d120b9203b",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7e17ca00-6ad0-4c8e-9f5b-7b76bcd4d27a",
+                            SecurityStamp = "8a77028c-12a3-4d36-87b9-0f7031104520",
                             TwoFactorEnabled = false,
                             UserName = "Tester"
                         },
                         new
                         {
-                            Id = "cdd0325a-0d84-4389-b878-76b500f5021e",
+                            Id = "184826be-9ba3-4815-81c8-1398e29852ec",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cdb25bdf-dc7b-4f53-bd79-0dce32bb067b",
+                            ConcurrencyStamp = "20f98c25-26bf-4484-b851-9d3080ef69d5",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d095675c-21d7-42ff-9ef6-6aa1d08e5030",
+                            SecurityStamp = "f969c279-e07f-4339-9263-67fac03c7daa",
                             TwoFactorEnabled = false,
                             UserName = "Demo"
                         });
@@ -492,17 +462,6 @@ namespace WebAPI.Migrations
                     b.Navigation("FunctionGroup");
                 });
 
-            modelBuilder.Entity("WebAPI.Model.EmployeeEmergencyContact", b =>
-                {
-                    b.HasOne("WebAPI.Model.Employee", "Employee")
-                        .WithMany("EmergencyContactList")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("WebAPI.Model.SystemUserRole", b =>
                 {
                     b.HasOne("WebAPI.Model.ApplicationSystem", "Application")
@@ -517,11 +476,6 @@ namespace WebAPI.Migrations
                     b.Navigation("Functions");
 
                     b.Navigation("Roles");
-                });
-
-            modelBuilder.Entity("WebAPI.Model.Employee", b =>
-                {
-                    b.Navigation("EmergencyContactList");
                 });
 
             modelBuilder.Entity("WebAPI.Model.FunctionGroup", b =>

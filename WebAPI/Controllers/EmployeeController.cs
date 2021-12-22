@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
             return Ok(employees);
         }
         // GET: api/Employee/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
             Employee employee = _dataRepository.Get(id);
