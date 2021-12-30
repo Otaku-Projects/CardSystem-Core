@@ -16,7 +16,7 @@ namespace WebAPI.Model
         public string Path { get; set; }
 
         [JsonIgnore]
-        public List<SystemUserRole> Roles { get; set; }
+        public List<SystemRole> Roles { get; set; }
         [JsonIgnore]
         public FunctionGroup FunctionGroup { get; set; }
         public ApplicationSystem Application { get; set; }

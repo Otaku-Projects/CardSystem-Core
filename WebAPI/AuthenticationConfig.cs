@@ -23,7 +23,7 @@ namespace WebAPI
              * the user is not allowed to login 
              * until we send a email confirmation link to him and he confirms it by clicking on it.
              * */
-            services.AddIdentity<SystemUser, SystemUserRole>(options => {
+            services.AddIdentity<SystemUser, SystemRole>(options => {
                     options.SignIn.RequireConfirmedAccount = false;
                 })
                 .AddEntityFrameworkStores<CoreDataContext>();

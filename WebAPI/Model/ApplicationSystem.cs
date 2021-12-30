@@ -13,7 +13,7 @@ namespace WebAPI.Model
         public string Code { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
-        public List<SystemUserRole> Roles { get; set; }
+        public List<SystemRole> Roles { get; set; }
         public List<ApplicationFunction> Functions { get; set; }
     }
 }

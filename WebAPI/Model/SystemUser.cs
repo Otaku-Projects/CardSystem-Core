@@ -29,5 +29,8 @@ namespace WebAPI.Model
          * and stores GUID values in it.
          * */
         public override string Id { get; set; }
+
+        public ICollection<SystemUserRole> SystemUserRoleList { get; set; }
+        //public ICollection<SystemUserRole> SystemUserRoleList { get; set; }
     }
 }

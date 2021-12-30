@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebAPI.Model
 {
-    public class SystemUserRole : IdentityRole
+    public class SystemUserRole : IdentityUserRole<string>
     {
-        public override string Id { get; set; }
+        public override string UserId { get => base.UserId; set => base.UserId = value; }
+        public override string RoleId { get => base.UserId; set => base.UserId = value; }
 
-        [Column("RoleName")]
-        public override string Name { get; set; }
+        [NotMapped]
+        public virtual SystemUser User { get; set; }
 
-        public string DisplayName { get; set; }
-
-        public ApplicationSystem Application { get; set; }
-        public List<ApplicationFunction> Functions { get; set; }
+        [NotMapped]
+        public virtual SystemRole Role { get; set; }
     }
 }

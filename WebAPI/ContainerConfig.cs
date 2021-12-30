@@ -51,6 +51,8 @@ namespace WebAPI
 
             services.AddScoped<IRepositoryWrapperEmployee, RepositoryWrapperEmployee>();
 
+            services.AddScoped<IRepositoryWrapperSystemUser, RepositoryWrapperSystemUser>();
+
 
         }
     }
