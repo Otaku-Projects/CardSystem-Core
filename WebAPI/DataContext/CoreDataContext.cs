@@ -63,7 +63,7 @@ namespace WebAPI.DataContext
                 entity.ToTable(name: "Roles");
                 entity.HasKey(r => r.Id);
 
-                entity.HasMany<SystemUserRole>()
+                entity.HasMany(u => u.SystemUserRoleList)
                     .WithOne(ur => ur.Role)
                     .HasForeignKey(ur => ur.RoleId)
                     .IsRequired();
@@ -79,13 +79,13 @@ namespace WebAPI.DataContext
                 entity.HasKey(r => new { r.UserId, r.RoleId });
 
                 entity.HasOne(e=>e.Role)
-                .WithMany()
+                .WithMany(e=>e.SystemUserRoleList)
                 .HasForeignKey(e=>e.RoleId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(e => e.User)
-                .WithMany()
+                .WithMany(e => e.SystemUserRoleList)
                 .HasForeignKey(e => e.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);

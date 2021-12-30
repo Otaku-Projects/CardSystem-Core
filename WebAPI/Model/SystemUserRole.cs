@@ -10,13 +10,19 @@ namespace WebAPI.Model
 {
     public class SystemUserRole : IdentityUserRole<string>
     {
-        public override string UserId { get => base.UserId; set => base.UserId = value; }
-        public override string RoleId { get => base.UserId; set => base.UserId = value; }
+        //public override string UserId { get => base.UserId; set => base.UserId = value; }
+        //public override string RoleId { get => base.UserId; set => base.UserId = value; }
 
-        [NotMapped]
+        //[NotMapped]
+        //public virtual SystemUser User { get; set; }
+
+        //[NotMapped]
+        //public virtual SystemRole Role { get; set; }
+
+        //public override string UserId { get; set; }
+        //public override string RoleId { get; set; }
+
         public virtual SystemUser User { get; set; }
-
-        [NotMapped]
         public virtual SystemRole Role { get; set; }
     }
 }

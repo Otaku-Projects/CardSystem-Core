@@ -27,10 +27,8 @@ namespace WebAPI.Model.Repository
 
         public SystemUser GetWithDetails(string id)
         {
-            //return this.FindByCondition(systemUser => systemUser.Id.Equals(id))
-            //    .Include(systemUser => systemUser.SystemUserRoleList)
-            //    .FirstOrDefault();
-
+            // using include or theninclude will create circular reference.
+            // JSON cannot handle circular reference
             return this.FindByCondition(systemUser => systemUser.Id.Equals(id))
                 .Include(systemUser => systemUser.SystemUserRoleList)
                 .ThenInclude(r => r.Role)
