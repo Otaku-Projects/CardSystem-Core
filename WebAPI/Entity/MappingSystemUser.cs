@@ -3,21 +3,20 @@ using WebAPI.Model;
 
 namespace WebAPI.Entity
 {
-    public class MappingEmployee : Profile
+    public class MappingSystemUser : Profile
     {
-        public MappingEmployee()
+        public MappingSystemUser()
         {
             // must make sure the properties name are same between Employee, EmployeeEntity
             // otherwise you need to use .ForMember()
-            CreateMap<Employee, EmployeeEntity>();
+            CreateMap<SystemUser, SystemUserEntity>();
             /**
              
                 .ForMember(
                 dest => dest.EmergencyContact
                 )
              */
-
-            CreateMap<EmployeeEmergencyContact, EmergencyContactEntity>();
+            CreateMap<SystemRole, SystemRoleEntity>();
         }
     }
 }

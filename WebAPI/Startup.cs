@@ -37,7 +37,16 @@ namespace WebAPI
             var connectionString = Configuration.GetConnectionString("WebApiDatabase");
 
 
-            services.AddControllers();
+            services
+            .AddControllers()
+            .AddNewtonsoftJson(options =>
+            {
+                // fixed: System.Text.Json.JsonException: A possible object cycle was detected.
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
