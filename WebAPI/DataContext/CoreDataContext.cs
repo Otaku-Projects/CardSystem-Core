@@ -135,7 +135,7 @@ namespace WebAPI.DataContext
 
             modelBuilder.Entity<SystemUser>().HasData(new SystemUser
             {
-                UserName = "Admin"
+                UserName = "Admin",
             }, new SystemUser
             {
                 UserName = "Tester"

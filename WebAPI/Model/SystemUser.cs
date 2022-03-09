@@ -32,5 +32,14 @@ namespace WebAPI.Model
 
         public ICollection<SystemUserRole> SystemUserRoleList { get; set; }
         //public ICollection<SystemUserRole> SystemUserRoleList { get; set; }
+
+        public SystemUser() : base()
+        {
+
+        }
+        public SystemUser(string userName) : base(userName)
+        {
+
+        }
     }
 }

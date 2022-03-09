@@ -19,5 +19,12 @@ namespace WebAPI.Model
 
         public ApplicationSystem Application { get; set; }
         public List<ApplicationFunction> Functions { get; set; }
+
+        public SystemRole() : base()
+        {
+        }
+        public SystemRole(string roleName) : base(roleName)
+        {
+        }
     }
 }

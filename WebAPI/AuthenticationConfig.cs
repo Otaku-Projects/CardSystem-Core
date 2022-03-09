@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -24,17 +25,30 @@ namespace WebAPI
              * until we send a email confirmation link to him and he confirms it by clicking on it.
              * */
             services.AddIdentity<SystemUser, SystemRole>(options => {
-                    options.SignIn.RequireConfirmedAccount = false;
-                })
-                .AddEntityFrameworkStores<CoreDataContext>();
+                options.SignIn.RequireConfirmedAccount = false;
+
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 1;
+            })
+            .AddEntityFrameworkStores<CoreDataContext>()
+            .AddDefaultTokenProviders();
+
 
             var jwtBearerTokenSettings = configurationSection.Get<JwtBearerTokenSettings>();
-            var key = Encoding.ASCII.GetBytes(jwtBearerTokenSettings.SecretKey);
+            var key = Encoding.UTF8.GetBytes(jwtBearerTokenSettings.SecretKey);
 
+            // add Authentication setting
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(options =>
             {
@@ -52,6 +66,14 @@ namespace WebAPI
                     ClockSkew = TimeSpan.Zero
                 };
             });
+
+            //services.Configure<JwtBearerOptions>(
+            //    IdentityServerJwtConstants.IdentityServerJwtBearerScheme,
+            //    options =>
+            //    {
+
+            //    }
+            //);
         }
     }
 }
