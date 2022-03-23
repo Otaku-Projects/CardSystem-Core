@@ -45,11 +45,51 @@ namespace WebAPI
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
-
+            // if using Swashbuckle
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "WebAPI",
+                    Description = "An ASP.NET Core Web API for managing ToDo items",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Example Contact",
+                        Url = new Uri("https://example.com/contact")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Example License",
+                        Url = new Uri("https://example.com/license")
+                    }
+                });
             });
+
+            // if using NSwag
+            // Register the Swagger services
+            //services.AddSwaggerDocument(config =>
+            //{
+            //    config.PostProcess = document =>
+            //    {
+            //        document.Info.Version = "v1";
+            //        document.Info.Title = "ToDo API";
+            //        document.Info.Description = "A simple ASP.NET Core web API";
+            //        document.Info.TermsOfService = "None";
+            //        document.Info.Contact = new NSwag.OpenApiContact
+            //        {
+            //            Name = "Shayne Boyer",
+            //            Email = string.Empty,
+            //            Url = "https://twitter.com/spboyer"
+            //        };
+            //        document.Info.License = new NSwag.OpenApiLicense
+            //        {
+            //            Name = "Use under LICX",
+            //            Url = "https://example.com/license"
+            //        };
+            //    };
+            //});
 
             /*
              * AddAutomapper method
@@ -65,6 +105,7 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // if using Swashbuckle
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -72,6 +113,11 @@ namespace WebAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
             }
             app.UseStaticFiles();
+
+            // if using NSwag
+            // Register the Swagger generator and the Swagger UI middlewares
+            //app.UseOpenApi();
+            //app.UseSwaggerUi3();
 
             app.UseHttpsRedirection();
             app.UseCors(x => 
