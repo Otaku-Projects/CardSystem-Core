@@ -28,7 +28,7 @@ namespace WebAPI.Model.Repository
         public Employee GetWithDetails(long employeeId)
         {
             return this.FindByCondition(employee => employee.EmployeeId.Equals(employeeId))
-                .Include(emergencyContact => emergencyContact.EmergencyContactList)
+                .Include(emergencyContact => emergencyContact.EmergencyContactList).ThenInclude(e=>e.EmergencyContactId)
                 .FirstOrDefault();
         }
     }
