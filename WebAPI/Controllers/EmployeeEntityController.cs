@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
         */
 
         // GET api/values
-        [HttpGet("{id}")]
+        [HttpGet]
         public IActionResult GetWithDetails(long employeeId)
         {
             //var domesticAccounts = _dataRepository.Employee.FindByCondition(x => x.EmployeeId.Equals("Domestic"));

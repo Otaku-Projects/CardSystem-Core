@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         }
         // GET: api/Employee
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
             IEnumerable<Employee> employees = _dataRepository.GetAll();
             return Ok(employees);

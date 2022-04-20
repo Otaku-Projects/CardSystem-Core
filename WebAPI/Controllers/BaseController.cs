@@ -6,7 +6,7 @@ namespace WebAPI.Controllers
     [Authorize]
     //[AllowAnonymous]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [Produces("application/json")]
     public class BaseController : ControllerBase
     {
