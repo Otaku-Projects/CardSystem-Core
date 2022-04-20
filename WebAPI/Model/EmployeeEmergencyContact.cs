@@ -8,7 +8,7 @@ namespace WebAPI.Model
     public class EmployeeEmergencyContact
     {
         [Key]
-        public long EmergencyContactId { get; set; }
+        public long Id { get; set; }
 
         // don't use [ForeignKey(nameof(Employee))]
 

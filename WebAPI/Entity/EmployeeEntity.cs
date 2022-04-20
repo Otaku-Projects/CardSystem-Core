@@ -17,7 +17,7 @@ namespace WebAPI.Entity
      * */
     public class EmployeeEntity
     {
-        public long EmployeeId { get; set; }
+        public long Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get; set; }

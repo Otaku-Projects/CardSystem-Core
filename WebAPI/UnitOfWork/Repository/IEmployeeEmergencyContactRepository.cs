@@ -8,7 +8,7 @@ namespace WebAPI.Model.Repository
     {
         public IEnumerable<EmployeeEmergencyContact> LinkingWithEmployee(Guid employeeId)
         {
-            return FindByCondition(a => a.EmployeeId.Equals(employeeId)).ToList();
+            return this.GenericFindByCondition(a => a.EmployeeId.Equals(employeeId)).ToList();
         }
     }
 }

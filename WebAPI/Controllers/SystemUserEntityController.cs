@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var users = _dataRepository.SystemUser.FindAll();
+                var users = _dataRepository.SystemUser.GenericGetAll();
 
                 var result = _mapper.Map<IEnumerable<SystemUser>>(users);
                 return Ok(result);

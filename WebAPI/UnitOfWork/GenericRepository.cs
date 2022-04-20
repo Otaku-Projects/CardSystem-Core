@@ -26,39 +26,39 @@ namespace WebAPI.Model.Repository
             _context = context;
         }
 
-        public IQueryable<T> FindAll()
+        public IQueryable<T> GenericGetAll()
         {
             // select with checking the soft-delete flag if it exists
 
             return this._context.Set<T>().AsNoTracking();
         }
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
+        public IQueryable<T> GenericFindByCondition(Expression<Func<T, bool>> expression)
         {
             // select with checking the soft-delete flag if it exists
 
             //return this._context.Set<T>().Where(expression).AsNoTracking();
             return this._context.Set<T>().Where(expression);
         }
-        public T FindById(object id)
+        public T GenericFindById(object id)
         {
             // select with checking the soft-delete flag if it exists
 
             return this._context.Set<T>().AsNoTracking().FirstOrDefault();
         }
 
-        public void Create(T entity)
+        public void GenericCreate(T entity)
         {
             // set the createDate, createUser fields if exists
 
             this._context.Set<T>().Add(entity);
         }
-        public void Update(T entity)
+        public void GenericUpdate(T entity)
         {
             // update the updateDate, updateUser fields if exists
 
             this._context.Set<T>().Update(entity);
         }
-        public void Delete(T entity)
+        public void GenericDelete(T entity)
         {
             // update the flag to provide soft-delete if the flag exists
 

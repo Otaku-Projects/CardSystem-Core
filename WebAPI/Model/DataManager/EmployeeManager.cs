@@ -14,16 +14,16 @@ namespace WebAPI.Model.DataManager
         }
         public IEnumerable<Employee> GetAll()
         {
-            return _dbContext.Employees.ToList();
+            return _dbContext.Employee.ToList();
         }
         public Employee Get(long id)
         {
-            return _dbContext.Employees
-                  .FirstOrDefault(e => e.EmployeeId == id);
+            return _dbContext.Employee
+                  .FirstOrDefault(e => e.Id == id);
         }
         public void Add(Employee entity)
         {
-            _dbContext.Employees.Add(entity);
+            _dbContext.Employee.Add(entity);
             _dbContext.SaveChanges();
         }
         public void Update(Employee employee, Employee entity)
@@ -37,7 +37,7 @@ namespace WebAPI.Model.DataManager
         }
         public void Delete(Employee employee)
         {
-            _dbContext.Employees.Remove(employee);
+            _dbContext.Employee.Remove(employee);
             _dbContext.SaveChanges();
         }
     }

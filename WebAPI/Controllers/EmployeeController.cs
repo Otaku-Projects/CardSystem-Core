@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
             _dataRepository.Add(employee);
             return CreatedAtRoute(
                   "Get",
-                  new { Id = employee.EmployeeId },
+                  new { Id = employee.Id },
                   employee);
         }
         // PUT: api/Employee/5

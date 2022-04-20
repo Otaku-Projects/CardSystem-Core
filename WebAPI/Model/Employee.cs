@@ -7,14 +7,17 @@ namespace WebAPI.Model
 {
     public class Employee
     {
-        [Key]
-        public long EmployeeId { get; set; }
+        //[Key]
+        //public long EmployeeId { get; set; }
 
         //public override string Id
         //{
         //    get { return this.EmployeeId.ToString(); }
         //    set { this.EmployeeId = (long)Convert.ToDouble(value); }
         //}
+
+        [Key]
+        public long Id { get; set; }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }

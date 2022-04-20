@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using WebAPI.Entity;
 using WebAPI.Model;
 using WebAPI.Model.Repository;
@@ -19,13 +20,12 @@ namespace WebAPI.Controllers
             _dataRepository = dataRepository;
             _mapper = mapper;
         }
-        [HttpGet]
-        [Route("Get")]
+        [HttpGet("Get")]
         public IActionResult Get()
         {
             try
             {
-                var employees = _dataRepository.Employee.FindAll();
+                var employees = _dataRepository.Employee.GenericGetAll().ToList();
 
                 var result = _mapper.Map<IEnumerable<EmployeeEntity>>(employees);
                 return Ok(result);
@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
         */
 
         // GET api/values
-        [HttpGet]
+        [HttpGet("Get/{employeeId:long}")]
         public IActionResult GetWithDetails(long employeeId)
         {
             //var domesticAccounts = _dataRepository.Employee.FindByCondition(x => x.EmployeeId.Equals("Domestic"));

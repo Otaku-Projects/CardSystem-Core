@@ -6,7 +6,7 @@ namespace WebAPI.Entity
 {
     public class EmergencyContactEntity
     {
-        public long EmergencyContactId { get; set; }
+        public long Id { get; set; }
         public long EmployeeId { get; set; }
         //public Employee Employee { get; set; }
 

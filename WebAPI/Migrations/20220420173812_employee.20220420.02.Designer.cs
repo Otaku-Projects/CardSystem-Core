@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.DataContext;
 
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(CoreDataContext))]
-    partial class CoreDataContextModelSnapshot : ModelSnapshot
+    [Migration("20220420173812_employee.20220420.02")]
+    partial class employee2022042002
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -267,48 +269,6 @@ namespace WebAPI.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("EmployeeEmergencyContact");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            EmployeeId = 1L,
-                            FullName = "Kennth Cheung",
-                            Phone = "90905454",
-                            Relationship = "Uncle"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            EmployeeId = 1L,
-                            FullName = "Leo Poon",
-                            Phone = "90995454",
-                            Relationship = "Father"
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            EmployeeId = 2L,
-                            FullName = "Anna Lee",
-                            Phone = "90904545",
-                            Relationship = "Mother"
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            EmployeeId = 2L,
-                            FullName = "Ricky Wong",
-                            Phone = "90994545",
-                            Relationship = "Father"
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            EmployeeId = 3L,
-                            FullName = "Ivy Chan",
-                            Phone = "90905454",
-                            Relationship = "Step Father"
-                        });
                 });
 
             modelBuilder.Entity("WebAPI.Model.FunctionGroup", b =>
@@ -369,22 +329,22 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ec8cb413-28c5-4a79-8b80-f61d5403c6d9",
-                            ConcurrencyStamp = "31146fb0-254d-4c2f-b079-08aa0f578a5b",
+                            Id = "a2693486-411f-4176-a7a6-77a2085e5d65",
+                            ConcurrencyStamp = "46cfbfac-0a78-43bb-b00b-82de546f0f0f",
                             DisplayName = "Administrator",
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = "7874ef41-dbbe-49dd-a7ac-6ab5eb2535e2",
-                            ConcurrencyStamp = "4832dfca-1e12-474d-8460-e0d892c49589",
+                            Id = "91078112-02cd-4cea-b704-7b1996664e79",
+                            ConcurrencyStamp = "49b18fa6-3748-40c0-bb49-b5f22f02fc53",
                             DisplayName = "Manager",
                             Name = "Manager"
                         },
                         new
                         {
-                            Id = "d6136cf4-f496-4cd2-b219-429cc9e806d2",
-                            ConcurrencyStamp = "46697f88-2967-4119-8174-8dcf9ad3d381",
+                            Id = "37352c09-a4f4-4ade-8325-b65eda246875",
+                            ConcurrencyStamp = "383d3765-a838-4d3e-837e-673d7153ae11",
                             DisplayName = "General Staff",
                             Name = "General"
                         });
@@ -457,37 +417,37 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "623f1f0a-ed73-4396-aaa5-1350a0c08ea6",
+                            Id = "2cee74ed-7a8b-4478-b5a3-2ae1dbef0ffa",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7493a463-a405-46ec-bde7-84979d472512",
+                            ConcurrencyStamp = "1a67fb16-759e-4a0a-b09f-6ddd44884fbf",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8381b486-b390-46bd-aaab-e3e578a0904c",
+                            SecurityStamp = "1f307a0d-0496-4e3a-9fd9-ed1668709399",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = "3ae6274b-e82d-4229-aeeb-505bd37c52a3",
+                            Id = "a3bb991f-561d-47df-8a76-fb6ea1614a10",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "673e7647-be11-41f3-aef1-819f477437ec",
+                            ConcurrencyStamp = "584f8ab9-6a47-420b-9058-2ba30c507ca0",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b7a0523f-3c55-4f27-8cd0-274c57947337",
+                            SecurityStamp = "f887fe27-8f99-4b82-b285-effeed8482c2",
                             TwoFactorEnabled = false,
                             UserName = "Tester"
                         },
                         new
                         {
-                            Id = "5a546b5d-799b-423e-bb65-499e9bed14e9",
+                            Id = "ae948656-8c7c-48e6-a1b2-d2aa915e7786",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ce5e86ca-11fc-44a3-869a-622bc13da586",
+                            ConcurrencyStamp = "b66ac9f8-2086-4138-aaf4-32122358e1e8",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "529ea267-f567-49e6-95a9-6cc4e739eff4",
+                            SecurityStamp = "1a1deb9a-c356-4f23-90e5-3c0fef38263a",
                             TwoFactorEnabled = false,
                             UserName = "Demo"
                         });

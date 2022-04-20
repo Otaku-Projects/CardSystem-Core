@@ -22,13 +22,16 @@ namespace WebAPI.DataContext
         //public DbSet<ApplicationFunction> Functions { get; set; }
         //public DbSet<FunctionGroup> FunctionGroups { get; set; }
 
-        public DbSet<Employee> Employees { get; set; }
+        // be careful on the property name
+        // if DbSet<Employee> Employees { get; set; } will create the table named as Employees
+        public DbSet<Employee> Employee { get; set; }
         public DbSet<EmployeeEmergencyContact> EmployeeEmergencyContact { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            this.CreateDevDummyData(builder);
+            // insert seed data
+            this.InsertSeedData(builder);
 
             //Rename
             builder.Entity<SystemUser>(entity => { 
@@ -116,8 +119,106 @@ namespace WebAPI.DataContext
             builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
             builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
         }
+        private void InsertSeedData(ModelBuilder builder)
+        {
+            this.CreateDevDummyUserData(builder);
+            this.CreateDevDummyEmployeeData(builder);
+        }
+        public void CreateDevDummyEmployeeData(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Employee>().HasData(
+                new Employee {
+                    Id = 1,
+                    FirstName = "Keith",
+                    LastName = "Poon",
+                    DateOfBirth = new DateTime(1999, 1, 1),
+                    PhoneNumber = "20205454",
+                    Email = "test@gmail.com",
+                    FullName = "Keith Poon",
+                    Gender = 0
 
-        public void CreateDevDummyData(ModelBuilder modelBuilder)
+                },
+                new Employee
+                {
+                    Id = 2,
+                    FirstName = "Ada",
+                    LastName = "Wong",
+                    DateOfBirth = new DateTime(1999, 2, 2),
+                    PhoneNumber = "29294545",
+                    Email = "ada@gmail.com",
+                    FullName = "Ada Wong",
+                    Gender = 0
+
+                },
+                new Employee
+                {
+                    Id = 3,
+                    FirstName = "Walter",
+                    LastName = "Ma",
+                    DateOfBirth = new DateTime(1990, 3, 3),
+                    PhoneNumber = "29295454",
+                    Email = "walter@gmail.com",
+                    FullName = "Walter Ma",
+                    Gender = 0
+
+                }
+            );
+
+
+            modelBuilder.Entity<EmployeeEmergencyContact>().HasData(
+                new EmployeeEmergencyContact
+                {
+                    Id = 1,
+                    EmployeeId = 1,
+                    FullName = "Kennth Cheung",
+                    Relationship = "Uncle",
+                    Phone = "90905454"
+                },
+                new EmployeeEmergencyContact
+                {
+                    Id = 2,
+                    EmployeeId = 1,
+                    FullName = "Leo Poon",
+                    Relationship = "Father",
+                    Phone = "90995454"
+                },
+                new EmployeeEmergencyContact
+                {
+                    Id = 3,
+                    EmployeeId = 2,
+                    FullName = "Anna Lee",
+                    Relationship = "Mother",
+                    Phone = "90904545"
+                },
+                new EmployeeEmergencyContact
+                {
+                    Id = 4,
+                    EmployeeId = 2,
+                    FullName = "Ricky Wong",
+                    Relationship = "Father",
+                    Phone = "90994545"
+                },
+                new EmployeeEmergencyContact
+                {
+                    Id = 5,
+                    EmployeeId = 3,
+                    FullName = "Ivy Chan",
+                    Relationship = "Step Father",
+                    Phone = "90905454"
+                }
+            );
+
+
+            //modelBuilder.Configurations.Add(new DepartmentTypeConfiguration());
+
+            // generate dummy data
+            modelBuilder.Entity<Employee>().Property(f => f.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<EmployeeEmergencyContact>().Property(f => f.Id).ValueGeneratedOnAdd();
+
+            //modelBuilder.Entity<Employee>().Property(p => p.EmployeeId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+        }
+
+        public void CreateDevDummyUserData(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SystemRole>().HasData(new SystemRole
             {
@@ -143,26 +244,6 @@ namespace WebAPI.DataContext
             {
                 UserName = "Demo"
             });
-
-            //modelBuilder.Entity<Employee>().HasData(new Employee
-            //{ 
-            //    EmployeeId = Guid.NewGuid().ToString(),
-            //    FirstName = "Peter",
-            //    LastName = "Pan"
-            //}, new Employee
-            //{
-            //    FirstName = "Chan",
-            //    LastName = "Tai Men"
-            //}
-            //    );
-
-            //modelBuilder.Configurations.Add(new DepartmentTypeConfiguration());
-
-            // generate dummy data
-            modelBuilder.Entity<Employee>().Property(f => f.EmployeeId).ValueGeneratedOnAdd();
-            modelBuilder.Entity<EmployeeEmergencyContact>().Property(f => f.EmergencyContactId).ValueGeneratedOnAdd();
-
-            //modelBuilder.Entity<Employee>().Property(p => p.EmployeeId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
 
         }

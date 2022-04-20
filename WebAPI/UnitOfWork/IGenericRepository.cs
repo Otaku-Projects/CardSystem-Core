@@ -7,11 +7,11 @@ namespace WebAPI.Model.Repository
 {
     public interface IGenericRepository<T> where T : class
     {
-        IQueryable<T> FindAll();
-        T FindById(object id);
-        IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
-        void Create(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        IQueryable<T> GenericGetAll();
+        T GenericFindById(object id);
+        IQueryable<T> GenericFindByCondition(Expression<Func<T, bool>> expression);
+        void GenericCreate(T entity);
+        void GenericUpdate(T entity);
+        void GenericDelete(T entity);
     }
 }

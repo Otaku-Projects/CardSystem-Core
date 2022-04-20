@@ -12,24 +12,31 @@ namespace WebAPI.Model.Repository
             : base(repositoryContext)
         {
         }
-        public IEnumerable<Employee> GetAll()
+        public IQueryable<Employee> GetAll()
         {
-            return FindAll()
-                .OrderBy(ow => ow.FullName)
-                .ToList();
+            return this.GenericGetAll()
+                .OrderBy(ow => ow.FullName);
         }
 
         public Employee GetById(long employeeId)
         {
-            return this.FindByCondition(employee => employee.EmployeeId.Equals(employeeId))
+            return this.GenericFindByCondition(employee => employee.Id.Equals(employeeId))
                 .FirstOrDefault();
         }
 
         public Employee GetWithDetails(long employeeId)
         {
-            return this.FindByCondition(employee => employee.EmployeeId.Equals(employeeId))
-                .Include(emergencyContact => emergencyContact.EmergencyContactList).ThenInclude(e=>e.EmergencyContactId)
+            // EF 5.0
+            return this.GenericFindByCondition(employee => employee.Id.Equals(employeeId))
+                .Include(emergencyContact => emergencyContact.EmergencyContactList)
+                .ThenInclude(e => e.Employee)
                 .FirstOrDefault();
+
+            // EF 6.0
+            //return this.GenericFindByCondition(employee => employee.Id.Equals(employeeId))
+            //    .Include(x => x.EmergencyContactList.Select(y => y.Employee))
+            //    .First();
+
         }
     }
 }
