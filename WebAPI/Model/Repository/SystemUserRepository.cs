@@ -6,7 +6,7 @@ using WebAPI.DataContext;
 
 namespace WebAPI.Model.Repository
 {
-    public class SystemUserRepository : RepositoryBase<SystemUser>, ISystemUserRepository
+    public class SystemUserRepository : GenericRepository<SystemUser>, ISystemUserRepository
     {
         public SystemUserRepository(CoreDataContext repositoryContext)
             : base(repositoryContext)

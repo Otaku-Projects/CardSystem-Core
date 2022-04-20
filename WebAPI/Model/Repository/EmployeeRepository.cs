@@ -6,7 +6,7 @@ using WebAPI.DataContext;
 
 namespace WebAPI.Model.Repository
 {
-    public class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
+    public class EmployeeRepository : GenericRepository<Employee>, IEmployeeRepository
     {
         public EmployeeRepository(CoreDataContext repositoryContext)
             : base(repositoryContext)

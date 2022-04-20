@@ -2,7 +2,7 @@
 
 namespace WebAPI.Model.Repository
 {
-    public class EmployeeEmergencyContactRepository : RepositoryBase<EmployeeEmergencyContact>, IEmployeeEmergencyContactRepository
+    public class EmployeeEmergencyContactRepository : GenericRepository<EmployeeEmergencyContact>, IEmployeeEmergencyContactRepository
     {
         public EmployeeEmergencyContactRepository(CoreDataContext repositoryContext)
             : base(repositoryContext)

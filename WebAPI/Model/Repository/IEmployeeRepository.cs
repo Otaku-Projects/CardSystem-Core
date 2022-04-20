@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WebAPI.Model.Repository
 {
-    public interface IEmployeeRepository : IRepositoryBase<Employee>
+    public interface IEmployeeRepository : IGenericRepository<Employee>
     {
         IEnumerable<Employee> GetAll();
         Employee GetById(long employeeId);

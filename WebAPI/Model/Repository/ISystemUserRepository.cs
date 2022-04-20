@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WebAPI.Model.Repository
 {
-    public interface ISystemUserRepository : IRepositoryBase<SystemUser>
+    public interface ISystemUserRepository : IGenericRepository<SystemUser>
     {
         IEnumerable<SystemUser> GetAll();
         SystemUser GetById(string id);

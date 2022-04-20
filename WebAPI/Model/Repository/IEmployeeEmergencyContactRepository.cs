@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace WebAPI.Model.Repository
 {
-    public interface IEmployeeEmergencyContactRepository : IRepositoryBase<EmployeeEmergencyContact>
+    public interface IEmployeeEmergencyContactRepository : IGenericRepository<EmployeeEmergencyContact>
     {
         public IEnumerable<EmployeeEmergencyContact> LinkingWithEmployee(Guid employeeId)
         {
