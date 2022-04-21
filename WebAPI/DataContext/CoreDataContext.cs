@@ -220,6 +220,7 @@ namespace WebAPI.DataContext
 
         public void CreateDevDummyUserData(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<SystemRole>().HasData(new SystemRole
             {
                 Name = "Admin",
