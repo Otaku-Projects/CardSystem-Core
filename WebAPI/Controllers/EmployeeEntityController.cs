@@ -7,16 +7,19 @@ using System.Linq;
 using WebAPI.Entity;
 using WebAPI.Model;
 using WebAPI.Model.Repository;
+using WebAPI.Repository;
 
 namespace WebAPI.Controllers
 {
     [AllowAnonymous]
     public class EmployeeEntityController : BaseController
     {
+        private IUnitOfWork _unitOfWork;
         private readonly IRepositoryWrapperEmployee _dataRepository;
         private IMapper _mapper;
-        public EmployeeEntityController(IRepositoryWrapperEmployee dataRepository, IMapper mapper)
+        public EmployeeEntityController(IUnitOfWork unitOfWork, IRepositoryWrapperEmployee dataRepository, IMapper mapper)
         {
+            _unitOfWork = unitOfWork;
             _dataRepository = dataRepository;
             _mapper = mapper;
         }
@@ -25,9 +28,10 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var employees = _dataRepository.Employee.GenericGetAll().ToList();
+                var employees1 = _dataRepository.Employee.GenericGetAll().ToList();
+                var employess2 = this._unitOfWork.EmployeeRepository.GenericGetAll().ToList();
 
-                var result = _mapper.Map<IEnumerable<EmployeeEntity>>(employees);
+                var result = _mapper.Map<IEnumerable<EmployeeEntity>>(employees1);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -63,14 +67,15 @@ namespace WebAPI.Controllers
             //return new string[] { "value1", "value2" };
             try
             {
-                var employee = _dataRepository.Employee.GetWithDetails(employeeId);
-                if(employee == null)
+                var employee1 = _dataRepository.Employee.GetWithDetails(employeeId);
+                var employee2 = this._unitOfWork.RepositoryWrapperEmployee.Employee.GetWithDetails(employeeId);
+                if (employee1 == null)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    var result = _mapper.Map<EmployeeEntity>(employee);
+                    var result = _mapper.Map<EmployeeEntity>(employee1);
                     return Ok(result);
                 }
             }

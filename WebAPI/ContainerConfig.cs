@@ -4,6 +4,7 @@ using System.Configuration;
 using WebAPI.DataContext;
 using WebAPI.Model;
 using WebAPI.Model.Repository;
+using WebAPI.Repository;
 
 namespace WebAPI
 {
@@ -37,17 +38,21 @@ namespace WebAPI
 
             ////Repository
             //services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            //services.AddTransient(typeof(IIdentityRepository<>), typeof(IdentityRepository<>));
+            //services.AddTransient(typeof(IidentityRepository<>), typeof(IdentityRepository<>));
 
             ////Unit of work
             //services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            //Unit of work
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             //services.AddScoped<IDataRepository<Employee>, EmployeeManager>();
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            services.AddTransient<IEmployeeEmergencyContactRepository, EmployeeEmergencyContactRepository>();
 
-            services.AddScoped<IRepositoryWrapperEmployee, RepositoryWrapperEmployee>();
+            services.AddTransient<IRepositoryWrapperEmployee, RepositoryWrapperEmployee>();
 
-            services.AddScoped<IRepositoryWrapperSystemUser, RepositoryWrapperSystemUser>();
+            services.AddTransient<IRepositoryWrapperSystemUser, RepositoryWrapperSystemUser>();
 
 
         }

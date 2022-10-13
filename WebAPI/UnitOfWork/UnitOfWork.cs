@@ -11,34 +11,19 @@ using DbContext = Microsoft.EntityFrameworkCore.DbContext;
 
 namespace WebAPI.Repository
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IUnitOfWork
     {
-        private CoreDataContext context;
-        private GenericRepository<ApplicationFunction> applicationFunctionRepository;
-        private GenericRepository<ApplicationFunctionGroup> applicationFunctionGrouopRepository;
-
-        public UnitOfWork(CoreDataContext context, GenericRepository<ApplicationFunction> applicationFunctionRepository, GenericRepository<ApplicationFunctionGroup> applicationFunctionGrouopRepository, bool disposed)
+        public CoreDataContext context { get; }
+        public IRepositoryWrapperEmployee RepositoryWrapperEmployee { get; }
+        public IEmployeeRepository EmployeeRepository { get; }
+        public IEmployeeEmergencyContactRepository EmergencyContactRepository { get; }
+        public UnitOfWork(CoreDataContext context, IRepositoryWrapperEmployee repositoryWrapperEmployee, IEmployeeRepository employeeRepository, IEmployeeEmergencyContactRepository emergencyContactRepository)
         {
             this.context = context;
-            this.applicationFunctionRepository = applicationFunctionRepository;
-            this.applicationFunctionGrouopRepository = applicationFunctionGrouopRepository;
-            this.disposed = disposed;
-        }
-
-        public GenericRepository<ApplicationFunction> ApplicationFunctionRepository
-        {
-            get
-            {
-                return applicationFunctionRepository;
-            }
-        }
-
-        public GenericRepository<ApplicationFunctionGroup> ApplicationFunctionGrouopRepository
-        {
-            get
-            {
-                return applicationFunctionGrouopRepository;
-            }
+            RepositoryWrapperEmployee = repositoryWrapperEmployee;
+            EmployeeRepository = employeeRepository;
+            EmergencyContactRepository = emergencyContactRepository;
+            this.disposed = false;
         }
 
         public void Save()
@@ -50,7 +35,8 @@ namespace WebAPI.Repository
             await this.context.SaveChangesAsync();
         }
 
-        private bool disposed = false;
+        public bool disposed { get; set; }
+
 
         protected virtual void Dispose(bool disposing)
         {
@@ -68,6 +54,21 @@ namespace WebAPI.Repository
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        void IUnitOfWork.CreateTransaction()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IUnitOfWork.Commit()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IUnitOfWork.Rollback()
+        {
+            throw new NotImplementedException();
         }
     }
 }
