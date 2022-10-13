@@ -5,9 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAPI.Model
 {
-    public class EmployeeEmergencyContact
+    public class EmployeeEmergencyContact : BaseModel
     {
-        [Key]
         public long Id { get; set; }
 
         // don't use [ForeignKey(nameof(Employee))]

@@ -21,6 +21,8 @@ namespace WebAPI.DataContext
         //public DbSet<ApplicationSystem> Applications { get; set; }
         //public DbSet<ApplicationFunction> Functions { get; set; }
         //public DbSet<FunctionGroup> FunctionGroups { get; set; }
+        public DbSet<ApplicationFunction> ApplicationFunction { get; set; }
+        public DbSet<ApplicationFunctionGroup> ApplicationFunctionGroup { get; set; }
 
         // be careful on the property name
         // if DbSet<Employee> Employees { get; set; } will create the table named as Employees

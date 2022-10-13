@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Model
 {
-    public class FunctionGroup
+    public class ApplicationFunctionGroup : BaseModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Icon { get; set; }
+        public string IconCSS { get; set; }
+        public string IconName { get; set; }
         public bool IsDisable { get; set; }
 
         public List<ApplicationFunction> Function { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Model
 {
-    public class ApplicationFunction
+    public class ApplicationFunction : BaseModel
     {
         public int Id { get; set; }
         public int? FunctionGroupId { get; set; }
@@ -15,10 +15,8 @@ namespace WebAPI.Model
         public string Icon { get; set; }
         public string Path { get; set; }
 
-        [JsonIgnore]
-        public List<SystemRole> Roles { get; set; }
-        [JsonIgnore]
-        public FunctionGroup FunctionGroup { get; set; }
+        public List<SystemRole> RoleList { get; set; }
+        public ApplicationFunctionGroup FunctionGroup { get; set; }
         public ApplicationSystem Application { get; set; }
     }
 }

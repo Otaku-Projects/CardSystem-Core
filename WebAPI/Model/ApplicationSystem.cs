@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Model
 {
-    public class ApplicationSystem
+    public class ApplicationSystem : BaseModel
     {
-        [Key]
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
-        public List<SystemRole> Roles { get; set; }
-        public List<ApplicationFunction> Functions { get; set; }
+        public List<SystemRole> RoleList { get; set; }
+        public List<ApplicationFunction> FunctionList { get; set; }
     }
 }

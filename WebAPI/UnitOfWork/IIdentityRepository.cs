@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace WebAPI.Model.Repository
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IidentityRepository<T> where T : class
     {
         IQueryable<T> GenericGetAll();
         T GenericFindById(object id);

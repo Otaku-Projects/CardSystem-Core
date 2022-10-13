@@ -9,19 +9,14 @@ using WebAPI.Repository;
 
 namespace WebAPI.Model.Repository
 {
-    public abstract class GenericRepository<T> : IGenericRepository<T>, IDisposable where T : BaseModel
+    public abstract class IdentityRepository<T> : IidentityRepository<T>, IDisposable where T : class
     {
         public CoreDataContext _context = null;
         private IDbSet<T> _entities;
         private string _errorMessage = string.Empty;
         private bool _isDisposed;
 
-        //public GenericRepository(IUnitOfWork<CoreDataContext> unitOfWork)
-        //    : this(unitOfWork.Context)
-        //{
-        //}
-
-        public GenericRepository(CoreDataContext context)
+        public IdentityRepository(CoreDataContext context)
         {
             _isDisposed = false;
             _context = context;
@@ -64,13 +59,6 @@ namespace WebAPI.Model.Repository
                 }
                 else
                 {
-                    // set the createDate, createUser fields if exists
-                    var universalTime = DateTime.Now.ToUniversalTime();
-
-                    entity.CreatedDate = entity.UpdatedDate = universalTime;
-                    entity.UpdatedBy = entity.CreatedBy;
-                    entity.IsActive = true;
-
                     this._context.Set<T>().Add(entity);
                 }
                 //Context.SaveChanges(); commented out call to SaveChanges as Context save changes will be 
@@ -88,10 +76,6 @@ namespace WebAPI.Model.Repository
         }
         public void GenericUpdate(T entity)
         {
-            // update the updateDate, updateUser fields if exists
-            //this._context.Set<T>().Update(entity);
-            entity.UpdatedDate = DateTime.Now.ToUniversalTime();
-
             this._context.Set<T>().Attach(entity);
             //this._entities.Attach(entity);
             this._context.Entry(entity).State = (Microsoft.EntityFrameworkCore.EntityState)EntityState.Modified;
@@ -102,13 +86,10 @@ namespace WebAPI.Model.Repository
         }
         public void GenericSoftDelete(T entity)
         {
-            // update the flag to provide soft-delete if the flag exists
-            entity.IsActive = false;
             this.GenericUpdate(entity);
         }
         public void GenericHardDelete(T entity)
         {
-            entity.UpdatedDate = DateTime.Now.ToUniversalTime();
             this._context.Set<T>().Remove(entity);
         }
 
