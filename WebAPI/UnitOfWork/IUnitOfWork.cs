@@ -20,6 +20,5 @@ namespace WebAPI.Repository
         void Save();
         Task SaveAsync();
         void Dispose(); 
-        bool disposed { get; set; }
     }
 }

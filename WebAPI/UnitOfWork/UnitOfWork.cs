@@ -23,7 +23,6 @@ namespace WebAPI.Repository
             RepositoryWrapperEmployee = repositoryWrapperEmployee;
             EmployeeRepository = employeeRepository;
             EmergencyContactRepository = emergencyContactRepository;
-            this.disposed = false;
         }
 
         public void Save()
@@ -35,7 +34,7 @@ namespace WebAPI.Repository
             await this.context.SaveChangesAsync();
         }
 
-        public bool disposed { get; set; }
+        private bool disposed { get; set; } = false;
 
 
         protected virtual void Dispose(bool disposing)
