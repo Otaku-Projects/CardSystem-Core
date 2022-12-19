@@ -7,6 +7,7 @@ using System;
 using System.Text;
 using WebAPI.DataContext;
 using WebAPI.Model;
+using WebAPI.Model.Auth;
 
 namespace WebAPI
 {

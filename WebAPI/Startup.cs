@@ -14,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPI.Model.Auth;
+using WebAPI.Models.Shared;
 
 namespace WebAPI
 {
@@ -29,6 +31,12 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //bind the model to the Configuration in the appsettings.json
+            services.Configure<JwtBearerTokenSettings>(Configuration.GetSection(JwtBearerTokenSettings.CONFIG_NAME));
+            services.Configure<ApplicationInformation>(Configuration.GetSection(ApplicationInformation.CONFIG_NAME));
+            services.Configure<WebApiPath>(Configuration.GetSection(WebApiPath.CONFIG_NAME));
+
+
             //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             //    .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
 
@@ -97,6 +105,10 @@ namespace WebAPI
              */
             //services.AddAutoMapper(typeof(Startup));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // same as above, but its better not use the class name
+
+            // allow to bring IConfigurationSection in AuthenticationController
+            // fix: Unable to resolve service for type 'Microsoft.Extensions.Configuration.IConfigurationSection' while attempting to activate 'WebAPI.Controllers.AuthenticationController'
+            services.AddSingleton<IConfiguration>(this.Configuration);
 
             AuthenticationConfig.Initialize(services, Configuration.GetSection("JwtBearerTokenSettings"));
             ContainerConfig.Initialize(services, connectionString);
