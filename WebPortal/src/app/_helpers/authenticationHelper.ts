@@ -20,8 +20,22 @@ export class AuthenticationHelper {
     public currentUserRoute: Observable<RouteInfo[]>;
 
     constructor(private authService: AuthenticationService, private router: Router) {
-        this.currentUserSubject = new BehaviorSubject<AuthInfo>(JSON.parse(localStorage.getItem(this.STORAGE_NAME)));
-        this.currentUserRouteSubject = new BehaviorSubject<RouteInfo[]>(JSON.parse(localStorage.getItem(this.STORAGE_ROUTES_NAME)));
+        let storagedName = localStorage.getItem(this.STORAGE_NAME);
+        let storagedRouteName = localStorage.getItem(this.STORAGE_ROUTES_NAME);
+
+        let emptyUser:AuthInfo = {
+            accessToken: "",
+        routes: [],
+        twoFA: false,
+        forgotPassword: false,
+        errorMessage: ""}
+        this.currentUserSubject = new BehaviorSubject<AuthInfo>(emptyUser);
+        if(storagedName)
+        this.currentUserSubject = new BehaviorSubject<AuthInfo>(JSON.parse(storagedName));
+
+        this.currentUserRouteSubject = new BehaviorSubject<RouteInfo[]>([]);
+        if(storagedRouteName)
+        this.currentUserRouteSubject = new BehaviorSubject<RouteInfo[]>(JSON.parse(storagedRouteName));
 
         this.currentUser = this.currentUserSubject.asObservable();
         this.currentUserRoute = this.currentUserRouteSubject.asObservable();
