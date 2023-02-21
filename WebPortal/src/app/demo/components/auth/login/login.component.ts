@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { AlertHelper } from 'src/app/_helpers/AlertHelper';
+import { AuthenticationHelper } from 'src/app/_helpers/authenticationHelper';
 
 @Component({
     selector: 'app-login',
@@ -20,10 +24,27 @@ export class LoginComponent {
     password!: string;
     email!: string;
 
-    constructor(public layoutService: LayoutService) { }
+    returnUrl: string;
+
+    constructor(
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        private alertHelper: AlertHelper,
+        public layoutService: LayoutService, public authenticationHelper: AuthenticationHelper) {
+            this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/user/search';
+        }
 
     login(id:string, pwd:string){
         console.dir(id)
         console.dir(pwd)
+
+        this.authenticationHelper.Login(id, pwd)
+        .pipe(first()).subscribe(
+            data => {
+                this.router.navigate([this.returnUrl]);
+            },
+            error => {
+                this.alertHelper.error(error.error.message);
+            });
     }
 }

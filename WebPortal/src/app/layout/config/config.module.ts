@@ -7,6 +7,9 @@ import { ButtonModule } from 'primeng/button';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { AppConfigComponent } from './app.config.component';
 
+import {ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -14,13 +17,17 @@ import { AppConfigComponent } from './app.config.component';
         SidebarModule,
         RadioButtonModule,
         ButtonModule,
-        InputSwitchModule
+        InputSwitchModule,
+        ToastModule
     ],
     declarations: [
         AppConfigComponent
     ],
     exports: [
         AppConfigComponent
+    ],
+    providers: [
+        MessageService
     ]
 })
 export class AppConfigModule { }

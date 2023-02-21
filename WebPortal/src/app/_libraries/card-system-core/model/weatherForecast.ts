@@ -12,7 +12,7 @@
 
 
 export interface WeatherForecast { 
-    date?: Date;
+    date?: string;
     temperatureC?: number;
     readonly temperatureF?: number;
     summary?: string | null;

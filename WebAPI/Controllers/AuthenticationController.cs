@@ -147,5 +147,17 @@ namespace WebAPI.Controllers
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
+
+        [Authorize]
+        [HttpGet("Logout")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult Logout()
+        {
+            //TODO: update log
+            UserDetails userDetails = base.GetUserDetails();
+            //Log.Info($"{userDetails.UserName} Logout");
+            return Ok(true);
+        }
     }
 }

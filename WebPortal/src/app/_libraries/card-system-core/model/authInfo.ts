@@ -16,5 +16,7 @@ export interface AuthInfo {
     accessToken?: string | null;
     routes?: Array<RouteInfo> | null;
     twoFA?: boolean;
+    forgotPassword?: boolean;
+    errorMessage?: string | null;
 }
 

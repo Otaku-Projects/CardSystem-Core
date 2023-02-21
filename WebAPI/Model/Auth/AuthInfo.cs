@@ -11,5 +11,7 @@ namespace WebAPI.Model.Auth
         public string AccessToken { get; set; }
         public List<RouteInfo> Routes { get; set; }
         public bool TwoFA { get; set; }
+        public bool ForgotPassword { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

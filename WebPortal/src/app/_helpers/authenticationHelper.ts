@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 // import { AuthInfo, AuthService, LoginModel, RouteInfo } from 'app/_libraries/card-system-core';
-import { AuthenticationService, LoginModel } from '../_libraries/card-system-core';
+import { AuthenticationService, AuthInfo, LoginModel, RouteInfo } from '../_libraries/card-system-core';
 import * as fs from "fs"
 
 @Injectable({ providedIn: 'root' })
@@ -55,15 +55,18 @@ export class AuthenticationHelper {
             password: password,
             applicationCode: this.APPLICATION_CODE
         };
-
         return this.authService.authenticationLoginPost(data)
             .pipe(
                 map(user => {
                     localStorage.setItem(this.STORAGE_NAME, JSON.stringify(user));
                     localStorage.setItem(this.STORAGE_ROUTES_NAME, JSON.stringify(user.routes));
 
-                    this.currentUserRouteSubject.next(user.routes);
-                    this.currentUserSubject.next(user);
+                    if(typeof (user) != "undefined" 
+                    && user!= null 
+                    && typeof (user.routes) !="undefined"
+                    && user.routes != null) this.currentUserRouteSubject.next(user.routes);
+                    if(typeof (user) != "undefined" 
+                    && user!= null )  this.currentUserSubject.next(user);
                     //this.cookieService.set(this.COOKIE_NAME, 'True', null, null, null, false, "Strict");
                     return user;
                 })
@@ -71,35 +74,38 @@ export class AuthenticationHelper {
     }
 
     Logout() {
-        this.authService.apiAuthLogoutGet().subscribe(p => {
+        this.authService.authenticationLogoutGet().subscribe(p => {
             localStorage.clear();
-            this.currentUserSubject.next(null);
-            this.currentUserRouteSubject.next(null);
+            // this.currentUserSubject.next(null)
+            // this.currentUserRouteSubject.next(null);
+
+            this.currentUserSubject.complete()
+            this.currentUserRouteSubject.complete();
 
             this.router.navigate(['/login']);
         });
     }
 }
 
-export interface AuthInfo { 
-    accessToken: string;
-    routes: Array<RouteInfo>;
-    twoFA?: boolean;
-    forgotPassword?: boolean;
-    errorMessage?: string | null;
-}
+// export interface AuthInfo { 
+//     accessToken: string;
+//     routes: Array<RouteInfo>;
+//     twoFA?: boolean;
+//     forgotPassword?: boolean;
+//     errorMessage?: string | null;
+// }
 
-export interface RouteInfo { 
-    path: string;
-    title: string;
-    icon: string;
-    iconCss: string;
-    iconName: string;
-    isShowInMenu: boolean;
-    _class: string;
-    extralink: boolean;
-    submenu: Array<RouteInfo>;
-}
+// export interface RouteInfo { 
+//     path: string;
+//     title: string;
+//     icon: string;
+//     iconCss: string;
+//     iconName: string;
+//     isShowInMenu: boolean;
+//     _class: string;
+//     extralink: boolean;
+//     submenu: Array<RouteInfo>;
+// }
 
 export interface UserLogin { 
     username: string;

@@ -11,6 +11,8 @@ import { EventService } from './demo/service/event.service';
 import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
+import { BASE_PATH } from './_libraries/card-system-core';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
     declarations: [
@@ -23,7 +25,8 @@ import { PhotoService } from './demo/service/photo.service';
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService
+        PhotoService, ProductService,
+        {provide: BASE_PATH, useValue: environment.webApi}
     ],
     bootstrap: [AppComponent]
 })
