@@ -92,7 +92,7 @@ export class AuthenticationHelper {
             this.currentUserSubject.complete()
             this.currentUserRouteSubject.complete();
 
-            this.router.navigate(['/login']);
+            this.router.navigate(['/auth/login']);
         });
     }
 }
