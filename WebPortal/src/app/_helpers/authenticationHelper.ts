@@ -22,6 +22,8 @@ export class AuthenticationHelper {
     constructor(private authService: AuthenticationService, private router: Router) {
         let storagedName = localStorage.getItem(this.STORAGE_NAME);
         let storagedRouteName = localStorage.getItem(this.STORAGE_ROUTES_NAME);
+        console.dir(storagedName)
+        console.dir(storagedRouteName)
 
         let emptyUser:AuthInfo = {
             accessToken: "",
@@ -30,12 +32,20 @@ export class AuthenticationHelper {
         forgotPassword: false,
         errorMessage: ""}
         this.currentUserSubject = new BehaviorSubject<AuthInfo>(emptyUser);
-        if(storagedName)
+        if(typeof storagedName != "undefined" && storagedName)
         this.currentUserSubject = new BehaviorSubject<AuthInfo>(JSON.parse(storagedName));
 
         this.currentUserRouteSubject = new BehaviorSubject<RouteInfo[]>([]);
-        if(storagedRouteName)
-        this.currentUserRouteSubject = new BehaviorSubject<RouteInfo[]>(JSON.parse(storagedRouteName));
+        if(typeof storagedRouteName != "undefined" && storagedRouteName)
+        try{
+            this.currentUserRouteSubject = new BehaviorSubject<RouteInfo[]>(JSON.parse(storagedRouteName));
+        }catch(e){
+            console.log("json parse user route error")
+            console.log("route value:");
+            console.log(storagedRouteName);
+            console.log("error:");
+            console.log(e);
+        }
 
         this.currentUser = this.currentUserSubject.asObservable();
         this.currentUserRoute = this.currentUserRouteSubject.asObservable();

@@ -17,8 +17,8 @@ namespace WebAPI.Model
 
         public ICollection<SystemUserRole> SystemUserRoleList { get; set; }
 
-        public ApplicationSystem Application { get; set; }
-        public List<ApplicationFunction> Functions { get; set; }
+        public ApplicationSystem ApplicationSystem { get; set; }
+        public List<ApplicationFunction> ApplicationFunctionsList { get; set; }
 
         public SystemRole() : base()
         {

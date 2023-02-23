@@ -13,6 +13,6 @@ namespace WebAPI.Model
         public string IconName { get; set; }
         public bool IsDisable { get; set; }
 
-        public List<ApplicationFunction> Function { get; set; }
+        public List<ApplicationFunction> ApplicationFunctionList { get; set; }
     }
 }

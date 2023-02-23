@@ -12,8 +12,10 @@ namespace WebAPI.Model
         public int? FunctionGroupId { get; set; }
         public int ApplicationId { get; set; }
         public string Title { get; set; }
-        public string Icon { get; set; }
+        public string IconCSS { get; set; }
+        public string IconName { get; set; }
         public string Path { get; set; }
+        public bool IsVisible { get; set; } // visible = false, the route will not show on the web client mennu, but would allow the script navigate to it
 
         public List<SystemRole> RoleList { get; set; }
         public ApplicationFunctionGroup FunctionGroup { get; set; }

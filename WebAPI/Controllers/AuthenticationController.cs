@@ -18,24 +18,27 @@ using WebAPI.Model.Repository;
 using WebAPI.Model.Auth;
 using Microsoft.Extensions.Options;
 using WebAPI.Models.Shared;
+using WebAPI.Services;
 
 namespace WebAPI.Controllers
 {
     [AllowAnonymous]
     public class AuthenticationController : BaseController
     {
+        private readonly IFunctionService functionService;
         private readonly UserManager<SystemUser> userManager;
         private readonly RoleManager<SystemRole> roleManager;
         private readonly IConfiguration _configuration;
         //private readonly IConfigurationSection _configurationSection;
         private readonly JwtBearerTokenSettings jwtBearerTokenSettings;
 
-        public AuthenticationController(UserManager<SystemUser> userManager, RoleManager<SystemRole> roleManager, IConfiguration configuration
+        public AuthenticationController(IFunctionService functionService, UserManager<SystemUser> userManager, RoleManager<SystemRole> roleManager, IConfiguration configuration
             //, IConfigurationSection configurationSection
             ,IOptions<JwtBearerTokenSettings> jwtTokenOptions
             ,IOptions<WebApiPath> webApiPath
             )
         {
+            this.functionService = functionService;
             this.userManager = userManager;
             this.roleManager = roleManager;
             _configuration = configuration;
@@ -79,7 +82,7 @@ namespace WebAPI.Controllers
                 //var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtBearerTokenSettings:Secret"]));
                 var authSigningKey = new SymmetricSecurityKey(key);
 
-                var token = new JwtSecurityToken(
+                var jwtToken = new JwtSecurityToken(
                     issuer: jwtBearerTokenSettings.Issuer,
                     audience: jwtBearerTokenSettings.Audience,
                     expires: DateTime.Now.AddHours(3),
@@ -87,11 +90,14 @@ namespace WebAPI.Controllers
                     signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                     );
 
-                return Ok(new
-                {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
-                });
+                //return Ok(new
+                //{
+                //    token = new JwtSecurityTokenHandler().WriteToken(token),
+                //    expiration = token.ValidTo
+                //});
+                var token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+                var routes = functionService.GetRoutes(userRoles, model.ApplicationCode);
+                return Ok(new AuthInfo { AccessToken = token, Routes = routes, TwoFA = false });
             }
             return Unauthorized();
         }

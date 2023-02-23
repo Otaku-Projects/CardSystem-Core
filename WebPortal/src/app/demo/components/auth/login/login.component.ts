@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
-import { AlertHelper } from 'src/app/_helpers/AlertHelper';
+import { AlertHelper } from 'src/app/_helpers/alertHelper';
 import { AuthenticationHelper } from 'src/app/_helpers/authenticationHelper';
 
 @Component({
@@ -31,7 +31,7 @@ export class LoginComponent {
         private activatedRoute: ActivatedRoute,
         private alertHelper: AlertHelper,
         public layoutService: LayoutService, public authenticationHelper: AuthenticationHelper) {
-            this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/user/search';
+            this.returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/user/list-and-search';
         }
 
     login(id:string, pwd:string){
