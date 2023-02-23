@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { LayoutService } from '../../../layout/service/app.layout.service';
 import { AlertHelper } from 'src/app/_helpers/alertHelper';
 import { AuthenticationHelper } from 'src/app/_helpers/authenticationHelper';
 
